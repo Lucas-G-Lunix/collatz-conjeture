@@ -14,16 +14,16 @@ function Inputs(props: { data: number[], handleChange: Function }) {
     useEffect(() => {
         setInputs(() => {
             let list: any[] = props.data.map((value, index) => (
-                <FormControl w="176">
-                    <FormLabel>Numero {index + 1}</FormLabel>
-                    <NumberInput key={index} id={index.toString()} name={index.toString()} variant='filled' color='black' defaultValue={value} onChange={valueOnChange => props.handleChange(valueOnChange, index)} min={1}>
-                        <NumberInputField />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
-                </FormControl>
+                    <FormControl w="176">
+                        <FormLabel>Numero {index + 1}</FormLabel>
+                        <NumberInput key={index} id={index.toString()} name={index.toString()} variant='filled' color='black' defaultValue={value} onChange={valueOnChange => props.handleChange(valueOnChange, index)} min={1}>
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                    </FormControl>
             ));
             return list
         })

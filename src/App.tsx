@@ -1,6 +1,6 @@
 import Inputs from './components/Inputs'
 import Graph from './components/Graph'
-import { Box, Heading, Flex, Stack, Button, Grid } from '@chakra-ui/react'
+import { Box, Heading, Flex, Stack, Button, SimpleGrid } from '@chakra-ui/react'
 import { useState } from 'react'
 
 function App() {
@@ -41,9 +41,9 @@ function App() {
         <Heading textAlign="center" my={5}>Collatz Conjeture Graphing</Heading>
         <form onSubmit={handleSubmit}>
           <Flex flexDir="column" gap={3} alignItems="center">
-            <Grid my={3} gap={4} maxWidth='50%' templateColumns='repeat(5, 1fr)' justifyContent="center" alignItems="center" minHeight="160">
+            <SimpleGrid my={3} gap={4} maxWidth='50%' columns={5} justifyContent="center" alignItems="center" minH="160">
               <Inputs data={formData} handleChange={handleChange} />
-            </Grid>
+            </SimpleGrid>
             <Stack spacing={4} direction='row' align='center'>
               <Button colorScheme='red' size='md' onClick={onClickLess}>
                 Less Numbers
