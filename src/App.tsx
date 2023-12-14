@@ -4,38 +4,35 @@ import { Box, Heading, Flex, Stack, Button, Grid } from '@chakra-ui/react'
 import { useState } from 'react'
 
 function App() {
-  const [inputsQuantity, setInputsQuantity] = useState(1);
-  const [formData, setFormData] = useState(Object.fromEntries([...Array(inputsQuantity).keys()].map(k => [k, 1])))
-  const [numbersToGraph, setNumbersToGraph] = useState({});
+  const [formData, setFormData] = useState<number[]>([1]);
+  const [numbersToGraph, setNumbersToGraph] = useState<number[]>([]);
 
   function onClickLess() {
-    if (inputsQuantity > 1) {
-      setInputsQuantity(prevState => prevState - 1)
-      const newData = formData;
-      delete newData[inputsQuantity - 1];
-      setFormData(newData);
+    if (formData.length > 1) {
+      const values = [...formData]
+      values.pop()
+      setFormData(values)
     }
   }
 
   function onClickMore() {
-    if (inputsQuantity < 10) {
-      setInputsQuantity(prevState => prevState + 1)
-      const newData = formData;
-      newData[inputsQuantity] = 1;
-      setFormData(newData);
+    if (formData.length < 10) {
+      const values = [...formData]
+      values.push(1)
+      setFormData(values)
     }
   }
 
-  function handleChange(value: string, name: number) {
-    setFormData(preState => ({
-      ...preState,
-      [name]: parseInt(value)
-    }));
+  function handleChange(value: number, index: number) {
+    setFormData((preState) => {
+      preState[index] = value
+      return preState
+    });
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setNumbersToGraph(formData);
+    setNumbersToGraph(formData)
   }
 
   return (
@@ -45,7 +42,7 @@ function App() {
         <form onSubmit={handleSubmit}>
           <Flex flexDir="column" gap={3} alignItems="center">
             <Grid my={3} gap={4} maxWidth='50%' templateColumns='repeat(5, 1fr)' justifyContent="center" alignItems="center" minHeight="160">
-              <Inputs quantity={inputsQuantity} handleChange={handleChange} />
+              <Inputs data={formData} handleChange={handleChange} />
             </Grid>
             <Stack spacing={4} direction='row' align='center'>
               <Button colorScheme='red' size='md' onClick={onClickLess}>

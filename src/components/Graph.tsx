@@ -25,42 +25,42 @@ function collatzConjeture(fromNumber: number): Array<number> {
   return number_list
 }
 
-function Graph(props: { numbersToGraph: any }) {
-  const [lines, setLines]: any[] = useState([])
-  const [data, setData]: any[] = useState([])
-  useEffect(()=>{
-    const objectKeys = Object.keys(props.numbersToGraph)
-    let collatz: any[] = []
-    let largestCollatz = 0
-    let data: any[] = []
-    objectKeys.forEach(element => {
-      let collatzNumber = collatzConjeture(props.numbersToGraph[element])
-      collatz.push({[element]: collatzNumber})
-      if(largestCollatz < collatzNumber.length){
-        largestCollatz = collatzNumber.length
-      }
-    });
-    for (let index = 0; index < largestCollatz; index++) {
-      let object: any = {}
-      object.name = index
-      objectKeys.forEach(element => {
-        if ((collatz[parseInt(element)])[element][index] !== undefined) {
-          object[element] = (collatz[parseInt(element)])[element][index]
+function Graph(props: { numbersToGraph: number[] }) {
+  const [lines, setLines] = useState<any[]>([])
+  const [data, setData] = useState<any[]>([])
+  useEffect(() => {
+    const numbersToGraph = props.numbersToGraph
+    setData(() => {
+      const arraydata: any[] = []
+      const collatzOfNumbers: any[] = []
+      let largestCollatz = 0
+      numbersToGraph.forEach(element => {
+        let collatzOfNumber = collatzConjeture(element)
+        collatzOfNumbers.push({ [element]: collatzOfNumber })
+        if (collatzOfNumber.length > largestCollatz) {
+          largestCollatz = collatzOfNumber.length
         }
       });
-      data.push(object)
-    }
+      for (let index = 0; index < largestCollatz; index++) {
+        let object: any = {}
+        object.name = index
+        numbersToGraph.forEach((element, indexNumber) => {
+          if (collatzOfNumbers[indexNumber][element][index] !== undefined) {
+            object[element] = collatzOfNumbers[indexNumber][element][index]
+          }
+        });
+        arraydata.push(object)
+      }
+      return arraydata
+    })
     setLines(() => {
-      let lines:any[] = []
-      objectKeys.forEach(element => {
-        lines.push((<Line key={parseInt(element)} name={props.numbersToGraph[element]} type="monotone" dataKey={element} stroke={randomColor()} />))
+      let lines: any[] = []
+      numbersToGraph.forEach((element, index) => {
+        lines.push((<Line key={index} name={element.toString()} type="monotone" dataKey={element} stroke={randomColor()} />))
       });
       return lines
     })
-    setData(data)
   }, [props.numbersToGraph])
-  // let collazNumber:Array<number> = collatzConjeture(props.numberToGraph)
-  // const data = collazNumber.map((number:number, index : number) => ({name:index + 1, number:number}))
   return (
     <LineChart
       width={1300}
@@ -84,3 +84,33 @@ function Graph(props: { numbersToGraph: any }) {
 }
 
 export default Graph
+
+// const objectKeys = Object.keys(props.numbersToGraph)
+//     let collatz: any[] = []
+//     let largestCollatz = 0
+//     let data: any[] = []
+//     objectKeys.forEach(element => {
+// let collatzNumber = collatzConjeture(props.numbersToGraph[element])
+// collatz.push({[element]: collatzNumber})
+// if(largestCollatz < collatzNumber.length){
+//   largestCollatz = collatzNumber.length
+// }
+//     });
+//     for (let index = 0; index < largestCollatz; index++) {
+//       let object: any = {}
+//       object.name = index
+//       objectKeys.forEach(element => {
+//         if ((collatz[parseInt(element)])[element][index] !== undefined) {
+//           object[element] = (collatz[parseInt(element)])[element][index]
+//         }
+//       });
+//       data.push(object)
+//     }
+//     setLines(() => {
+//       let lines:any[] = []
+//       objectKeys.forEach(element => {
+//         lines.push((<Line key={parseInt(element)} name={props.numbersToGraph[element]} type="monotone" dataKey={element} stroke={randomColor()} />))
+//       });
+//       return lines
+//     })
+//     setData(data)
