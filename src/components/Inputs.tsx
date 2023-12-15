@@ -1,29 +1,14 @@
 import { useEffect, useState } from 'react'
-import {
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
-    FormControl,
-    FormLabel,
-} from '@chakra-ui/react';
 
 function Inputs(props: { data: number[], handleChange: Function }) {
     const [inputs, setInputs] = useState<any[]>([(<></>)]);
     useEffect(() => {
         setInputs(() => {
             let list: any[] = props.data.map((value, index) => (
-                    <FormControl w="176">
-                        <FormLabel>Numero {index + 1}</FormLabel>
-                        <NumberInput key={index} id={index.toString()} name={index.toString()} variant='filled' color='black' defaultValue={value} onChange={valueOnChange => props.handleChange(valueOnChange, index)} min={1}>
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                    </FormControl>
+                    <div className='input--div'>
+                        <label>Numero {index + 1}</label>
+                        <input type='number' className='input' min="1" key={index} id={index.toString()} value={value} name={index.toString()} onChange={event => props.handleChange(event)} />
+                    </div>
             ));
             return list
         })

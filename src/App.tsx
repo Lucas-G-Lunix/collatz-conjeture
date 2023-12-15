@@ -1,6 +1,6 @@
 import Inputs from './components/Inputs'
 import Graph from './components/Graph'
-import { Box, Heading, Flex, Stack, Button, SimpleGrid } from '@chakra-ui/react'
+import "./index.css"
 import { useState } from 'react'
 
 function App() {
@@ -23,45 +23,45 @@ function App() {
     }
   }
 
-  function handleChange(value: number, index: number) {
-    setFormData((preState) => {
-      preState[index] = value
-      return preState
-    });
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const values = [...formData]
+    values[parseInt(event.target.name)] = parseInt(event.target.value)
+    setFormData(values)
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setNumbersToGraph(formData)
+    const values = [...formData]
+    setNumbersToGraph(values) 
   }
 
   return (
-    <Box>
-      <Box bg='#007bff' w='100%' p={4} color='white' mb={3}>
-        <Heading textAlign="center" my={5}>Collatz Conjeture Graphing</Heading>
+    <main className='main--section'>
+      <section className='data--section'>
+        <h1 id='title--data'>Collatz Conjeture Graphing</h1>
         <form onSubmit={handleSubmit}>
-          <Flex flexDir="column" gap={3} alignItems="center">
-            <SimpleGrid my={3} gap={4} maxWidth='50%' columns={5} justifyContent="center" alignItems="center" minH="160">
+          <section className='form--section'>
+            <div className='inputs--section'>
               <Inputs data={formData} handleChange={handleChange} />
-            </SimpleGrid>
-            <Stack spacing={4} direction='row' align='center'>
-              <Button colorScheme='red' size='md' onClick={onClickLess}>
+            </div>
+            <div className='buttons--section'>
+              <button id='btn--less' className='btn--input' onClick={onClickLess}>
                 Less Numbers
-              </Button>
-              <Button colorScheme='green' size='md' onClick={onClickMore}>
+              </button>
+              <button id='btn--more' className='btn--input' onClick={onClickMore}>
                 More Numbers
-              </Button>
-              <Button colorScheme='whatsapp' size='md' type='submit'>
+              </button>
+              <button id='btn--submit' className='btn--input' type='submit'>
                 Graph
-              </Button>
-            </Stack>
-          </Flex>
+              </button>
+            </div>
+          </section>
         </form>
-      </Box>
-      <Flex flexDirection="row" alignItems="center" justifyContent="center">
+      </section>
+      <section className='graph--section'>
         <Graph numbersToGraph={numbersToGraph} />
-      </Flex>
-    </Box>
+      </section>
+    </main>
   )
 }
 

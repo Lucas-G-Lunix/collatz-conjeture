@@ -8,8 +8,10 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import randomColor from 'randomcolor';
 
+function randomColor() {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
 
 function collatzConjeture(fromNumber: number): Array<number> {
   let number_list: Array<number> = [];
@@ -64,7 +66,7 @@ function Graph(props: { numbersToGraph: number[] }) {
   return (
     <LineChart
       width={1300}
-      height={650}
+      height={580}
       data={data}
       margin={{
         top: 5,
@@ -84,33 +86,3 @@ function Graph(props: { numbersToGraph: number[] }) {
 }
 
 export default Graph
-
-// const objectKeys = Object.keys(props.numbersToGraph)
-//     let collatz: any[] = []
-//     let largestCollatz = 0
-//     let data: any[] = []
-//     objectKeys.forEach(element => {
-// let collatzNumber = collatzConjeture(props.numbersToGraph[element])
-// collatz.push({[element]: collatzNumber})
-// if(largestCollatz < collatzNumber.length){
-//   largestCollatz = collatzNumber.length
-// }
-//     });
-//     for (let index = 0; index < largestCollatz; index++) {
-//       let object: any = {}
-//       object.name = index
-//       objectKeys.forEach(element => {
-//         if ((collatz[parseInt(element)])[element][index] !== undefined) {
-//           object[element] = (collatz[parseInt(element)])[element][index]
-//         }
-//       });
-//       data.push(object)
-//     }
-//     setLines(() => {
-//       let lines:any[] = []
-//       objectKeys.forEach(element => {
-//         lines.push((<Line key={parseInt(element)} name={props.numbersToGraph[element]} type="monotone" dataKey={element} stroke={randomColor()} />))
-//       });
-//       return lines
-//     })
-//     setData(data)

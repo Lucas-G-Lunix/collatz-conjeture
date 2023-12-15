@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+}
+/* bg='' w='100%' p={4} color='white' mb={3} */
+
+.main--section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data--section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff;
+  color: white;
+  width: 100%;
+  padding: 15px 0px;
+  margin-bottom: 3px;
+}
+
+#title--data {
+  font-size: 2em;
+  font-weight: 900;
+}
+
+.inputs--section {
+  display: flex;
+  max-width: 1000px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+}
+
+.input--div {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 5px;
+}
+
+.input{
+  border-radius: 5px;
+  color: black;
+  padding: 5px;
+  margin: 5px 0px;
+  border: none;
+}
+
+.buttons--section {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--input {
+  margin: 3px;
+  padding: 10px;
+  font-size: medium;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn--input:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.btn--input:active{
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+#btn--less {
+  background-color: red;
+}
+
+#btn--more {
+  background-color: green;
+}
+
+#btn--submit {
+  background-color: #1fcc19;
+}
+
+/* .graph--section {
+} */
