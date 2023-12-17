@@ -12,6 +12,7 @@ function App() {
       const values = [...formData]
       values.pop()
       setFormData(values)
+      setNumbersToGraph(values)
     }
   }
 
@@ -20,6 +21,7 @@ function App() {
       const values = [...formData]
       values.push(1)
       setFormData(values)
+      setNumbersToGraph(values)
     }
   }
 
@@ -32,7 +34,7 @@ function App() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const values = [...formData]
-    setNumbersToGraph(values) 
+    setNumbersToGraph(values)
   }
 
   return (
